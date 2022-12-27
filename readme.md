@@ -111,6 +111,7 @@ ls(list) mkdir(make directory) cd(change directory) .현재폴더 ..상위폴더
 2. 변경된 파일을 모아서(add)
 3. 저장을 한다 제출(commit -m)
 ```
+![repository](repository.png)
 ## <예시>
 ````
 폴더 생성 및 마우스 우클릭으로 VSCode 실행   
@@ -120,5 +121,8 @@ git init                                        git repository 설정
 git config --global user.email "이메일"          git 이메일 설정
 git config --global user.name "사용자이름"       git 사용자이름 설정
 git add readme.md                               변경된 파일을 모은다
+git add .                                       (폴더내 파일 한번에 모으기)
 git commit -m readme.md                         제출한다
+git status                                      상태를 본다
+git log --all --oneline                         기록을 본다
 ````
