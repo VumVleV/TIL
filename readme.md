@@ -97,6 +97,9 @@ int main(void){
 ls(list) mkdir(make directory) cd(change directory) .현재폴더 ..상위폴더 rm(remove), r(recursive;재귀)   
 ~(home) $(readysign)
 ```   
+
+
+***
 # 버전관리
 ## 의미
 `버전관리`의 의미를 이해하고 `버전관리도구`에 대해 이해한다
@@ -105,7 +108,7 @@ ls(list) mkdir(make directory) cd(change directory) .현재폴더 ..상위폴더
 -중앙집중식버전관리시스템 : 로컬에서는 파일을 편집하고 서버에 반영중앙 서버에서만 버전을 관리   
 -분산버전관리시스템` : 로컬에서도 버전을 기록하고 관리 원격 저장소를 활용하여 협업. GIT.
  ```
-## GIT을 통한 버전관리
+## GIT을 통한 버전관리 1
 ```
 1. 작업을 하고(보고서 작성)
 2. 변경된 파일을 모아서(add)
@@ -126,3 +129,86 @@ git commit -m readme.md                         제출한다
 git status                                      상태를 본다
 git log --all --oneline                         기록을 본다
 ````
+## GIT을 통한 버전관리 2 
+```
+GIT 사용 시 주의사항   
+
+1. 저장소의 이름 변경 -> O (.git이 git의 본체임)
+2. .git폴더 삭제 -> X (버전이 모두 삭제됨)
+3. 폴더를 다른 곳으로 이동(예, 바탕화면 --> C:/) -> △ ; 다른 git 저장소 폴더, 하위폴더면 안된다
+```   
+
+### `Git`은 `버전`을 관리한다 `GitHub` 원격저장소도 `버전`을 관리한다.   
+
+```
+Push는 로컬 저장소의 버전을 원격저장소로 보낸다(local repository -> remote repository)
+Pull은 원격저장소의 버전을 로컬 저장소로 가져온다
+```
+```
+원격 저장소 설정 및 버전 보내기   
+
+git remote add origin <url>   ... 원격 저장소의 설정
+git remote remove origin      ... 잘못 등록한 원격 저장소의 삭제
+git push origin master        ... 로컬 저장소의 Committed 버전을 원격 저장소로 Push (commit된 버전만이 push 됨에 유의)
+git remote -v                 ... 원격 저장소의 정보를 확인함
+
+*** origin = global name of remote repository
+    master = represents a branch
+    Mine git url ex = https://github.com/VumVleV/TIL.git
+```
+```
+원격 저장소로부터 받아오기 -1.
+
+>>> git pull <원격저장소이름><브랜치이름>
+
+다운로드(zip : 가장 최신 버전 상태의 파일만 받는 것 // clone: 저장소를 받아오는 것으로 모든 버전을 받음
+  clone: 원격저장소 복제
+   pull: 원격저장소 커밋 가져오기
+
+따라서 프로젝트 시작 시 clone을 받아 온다. clone시 원격저장소 이름의 폴더가 생성됨에 유의
+```
+```
+원격 저장소로부터 받아오기 -2.
+
+git clone <url>                   ---원격 저장소 복제
+git remote –v                     ---원격 저장소 정보 확인 (v, verbose)
+git remote add <원격저장소><url>   ---원격저장소 추가(일반적으로 오리진)
+git remote remove <원격저장소>         ---원격저장소 삭제 (만일 잘못 입력했을시 삭제한다)
+git push <원격저장소><브랜치>       ---원격저장소에 push (권한 있을 시)
+git pull <원격저장소><브랜치>       ---원격저장소로부터 pull
+
+*** git clone의 경우 git init을 하지 않도록 주의한다
+```
+## GIT을 통한 버전관리 3 
+### **중복 Branch**
+```
+(P)만일 동일 버전에 대해 여러 branch 경우 --> git이 merge conflict
+(S)
+1. 원격저장소의 커밋을 원격저장소로 pull,
+2. 로컬에서 두 커밋을 병합(추가 커밋 발생) (merge conflict GIT으로 관리)
+3. 다시 GitHub으로 push
+```
+![](branch.png)
+
+### **.gitignore**
+```
+---버전관리랑 상관없는 파일 무시---
+
+대상:
+개발 언어관련(파이썬:venv/, 자바스크립트:node_momdules/), 
+개발 환경관련(운영체제=windows,mac,linux) ex) .DS_Store: Thumb.db, desktop.ini 등(windows), 
+텍스트에디터/IDE(visuaal studio code 등), 
+secret.csv, *.pptx, 
+
+콘솔로 .gitignore을 생성한다 (.gitignore만들 때 vscode에서 직접 만들자 / git 저장소마다 별도로 만들어줘야한다!)
+.gitignore : git 파일/폴더 등을 관리하지 않는다 (.이름 -> 숨김파일 형식)
+$ git status -> .gitignore을 확인할 수 있다
+
+이미 커밋한 것
+$ git status -> 무시하지 않음을 확인
+이미 커밋된 것은 무시하지 않는다. 따라서 미리 .gitignore를 설정하자
+커밋을 삭제하면 되겠지만 이는 Commit History를 변하게 하므로 지양한다
+```
+### **ignore 관련 유용한 사이트**   
+**[gitignore.io](https://www.toptal.com/developers/gitignore/)**   
+**[github/gitignore](https://github.com/github/gitignore)**
