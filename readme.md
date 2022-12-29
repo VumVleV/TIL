@@ -212,3 +212,46 @@ $ git status -> 무시하지 않음을 확인
 ### **ignore 관련 유용한 사이트**   
 **[gitignore.io](https://www.toptal.com/developers/gitignore/)**   
 **[github/gitignore](https://github.com/github/gitignore)**
+
+## GIT을 통한 버전관리 4
+```
+git branch                        --- 새로운 branch 생성
+git checkout <branch>             --- 다른 branch로 이동
+git status                        --- unstaged와 staged 확인
+git log --oneline                 --- committed 확인 
+git merge <branch>                --- branch 병합 (master에서; git checkout master)
+  1587f6f (HEAD -> master, feature/main) Complete main page
+  654ef20 Create README
+git branch –d <branch>            --- branch 삭제
+  Deleted branch feature/main (was 1587f6f)
+git checkout –b feature/report    --- New branch로 이동
+git log —oneline —graph           --- graph로 committed 확인
+git restore —staged <file>        --- staged file 삭제
+git restore README.md             --- 실수로 껐을 때 restore
+git commit —ammend                --- committed된 것을 변경 --> commit history change 주의!!
+```
+![그림1](1.png)
+```
+협업의 진행상태
+
+1. fast forward
+2. merge – merge commit
+3. merge – merge conflict   (git status -> you have unmerged paths)
+  3-1. accept current changes
+  3-2. accept incoming changes
+  3-3. accept both changes
+```
+```
+PR (Pull Request)
+1. 마스터 브랜치는 반드시 배포 가능한 상태여야 한다
+2. feature branch는 각 기능의 의도를 알 수 있도록 작성한다
+3. Commit message는 매우 중요하며, 명확하게 작성한다
+4. Pull Request를 통해 협업을 진행한다
+5. 변경사항을 반영하고 싶다면, master branch에 병합한다 ...
+
+1. SHARED Repository model
+2. folk and pull model
+
+Clone하고 싶은 GitHub 프로젝트에 가서 Fork로 내 원격저장소에 들인후 clone한다. 이후 내 원격저장소로 push후 PR하면 선택적으로 contribuition 할 수 있다.
+```
+![그림2](2.png)
